@@ -5,7 +5,9 @@ import (
 )
 
 type Engine struct {
-	rout *router
+	*RouterGroup
+	rout   *router
+	groups []*RouterGroup
 }
 
 func (e *Engine) Get(pattern string, handler HandlerFunc) {
@@ -21,9 +23,12 @@ func (e *Engine) Run(addr string) error {
 }
 
 func NewEngine() *Engine {
-	return &Engine{
+	engine := &Engine{
 		rout: NewRouter(),
 	}
+	engine.RouterGroup = &RouterGroup{engine: engine}
+	engine.groups = []*RouterGroup{engine.RouterGroup}
+	return engine
 }
 
 // 统一拦截
