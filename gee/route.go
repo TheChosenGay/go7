@@ -25,7 +25,7 @@ func (r *router) Handle(c *Context) {
 		handler(c)
 	} else {
 		c.Writer.WriteHeader(404)
-		_, _ = c.Writer.Write([]byte("404 NOT FOUND: " + c.Path))
+		_, _ = c.Writer.Write([]byte("404  NOT FOUND: " + c.Path))
 	}
 }
 
