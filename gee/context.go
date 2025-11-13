@@ -18,10 +18,17 @@ type Context struct {
 	Req    http.Request
 	Writer http.ResponseWriter
 
+	// 路由参数
+	Params map[string]string
+
 	Method string
 	Path   string
 
 	StatusCode StatusType
+}
+
+func (c *Context) Param(key string) string {
+	return c.Params[key]
 }
 
 func (c *Context) PostForm(key string) string {
